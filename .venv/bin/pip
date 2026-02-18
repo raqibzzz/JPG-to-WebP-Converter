@@ -1,5 +1,5 @@
 #!/bin/sh
-'''exec' "/Users/raqibmuktadir/Projects/JPG to WebP Converter/.venv/bin/python3" "$0" "$@"
+'''exec' "/Users/raqibmuktadir/Projects/JPG to WebP Converter/.venv/bin/python" "$0" "$@"
 ' '''
 # -*- coding: utf-8 -*-
 import re

@@ -10,12 +10,6 @@ from typing import Iterable, List
 
 from PIL import Image
 
-try:
-    import pillow_avif  # noqa: F401
-except Exception:
-    # Optional; AVIF can still work if Pillow itself has support.
-    pass
-
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description="Convert .jpg/.jpeg files to WebP and/or AVIF."
