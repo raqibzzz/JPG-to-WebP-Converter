@@ -105,10 +105,9 @@ HTML = """
       <div class="grid" style="margin-top: 12px;">
         <div>
           <label for="format">Format</label>
-          <select id="format" name="format">
-            <option value="both">WebP + AVIF</option>
-            <option value="webp">WebP only</option>
-            <option value="avif">AVIF only</option>
+          <select id="format" name="format" required>
+            <option value="webp" selected>WebP</option>
+            <option value="avif">AVIF</option>
           </select>
         </div>
 
@@ -164,8 +163,8 @@ def index() -> Response | str:
     if not files:
         return render_template_string(HTML, error="Please upload at least one image.")
 
-    fmt = request.form.get("format", "both")
-    if fmt not in {"webp", "avif", "both"}:
+    fmt = request.form.get("format", "webp")
+    if fmt not in {"webp", "avif"}:
         return render_template_string(HTML, error="Invalid format selected.")
 
     try:
@@ -182,8 +181,7 @@ def index() -> Response | str:
     except ValueError:
         return render_template_string(HTML, error="Parallel jobs must be between 1 and 32.")
 
-    formats = ["webp", "avif"] if fmt == "both" else [fmt]
-    if "avif" in formats and not avif_available():
+    if fmt == "avif" and not avif_available():
         return render_template_string(HTML, error="AVIF encoding is not available in your Pillow build.")
 
     payloads: list[tuple[str, bytes]] = []
@@ -198,8 +196,7 @@ def index() -> Response | str:
 
     jobs: list[tuple[str, bytes, str]] = []
     for name, raw in payloads:
-        for one_fmt in formats:
-            jobs.append((name, raw, one_fmt))
+        jobs.append((name, raw, fmt))
 
     results: list[tuple[str, bytes]] = []
     name_counts: dict[str, int] = {}

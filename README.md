@@ -31,9 +31,9 @@ Then open:
 In the browser GUI:
 
 - Add 20-30 images at once (multi-file upload)
-- Choose format (`webp`, `avif`, or `both`)
+- Choose one format (`webp` or `avif`)
 - Set quality and `Parallel jobs` (set to `8-16` for 20-30 images)
-- Click **Convert and Download ZIP**
+- Click **Convert and Download ZIP** (only the selected format is included)
 
 ### Desktop GUI (Tk)
 
