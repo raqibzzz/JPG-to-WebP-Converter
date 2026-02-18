@@ -31,9 +31,12 @@ Then open:
 In the browser GUI:
 
 - Add 20-30 images at once (multi-file upload)
+- Drag and drop JPG/JPEG files directly into the page
 - Choose one format (`webp` or `avif`)
 - Set quality and `Parallel jobs` (set to `8-16` for 20-30 images)
-- Click **Convert and Download ZIP** (only the selected format is included)
+- Click **Convert**
+- Watch live progress in the progress bar
+- Click **Download ZIP** when conversion finishes (only selected format included)
 
 ### Desktop GUI (Tk)
 
@@ -81,3 +84,4 @@ python3 converter.py ./images -r --overwrite
 - AVIF support depends on Pillow build/plugin availability.
 - This tool only reads `.jpg` and `.jpeg` inputs.
 - GUI supports parallel conversion jobs so 20-30 image batches can be processed concurrently.
+- Web GUI uses chunked processing to stay stable on larger batches (like 117 images).
